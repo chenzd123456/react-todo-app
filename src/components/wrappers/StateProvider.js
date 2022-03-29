@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {FILTER_ALL} from '../../services/filter';
 import {MODE_CREATE, MODE_NONE} from '../../services/mode';
 import {objectWithOnly, wrapChildrenWith} from '../../util/common';
-import {getAll, addToList, updateStatus} from '../../services/todo';
+import {getAll, addToList, delFromList, updateStatus} from '../../services/todo';
 
 class StateProvider extends Component {
     constructor() {
@@ -18,7 +18,7 @@ class StateProvider extends Component {
     render() {
         let children = wrapChildrenWith(this.props.children, {
             data: this.state,
-            actions: objectWithOnly(this, ['addNew', 'changeFilter', 'changeStatus', 'changeMode', 'setSearchQuery'])
+            actions: objectWithOnly(this, ['addNew', 'delItem', 'changeFilter', 'changeStatus', 'changeMode', 'setSearchQuery'])
         });
 
         return <div>{children}</div>;
@@ -28,6 +28,11 @@ class StateProvider extends Component {
         let updatedList = addToList(this.state.list, {text, completed: false});
 
         this.setState({list: updatedList});
+    }
+
+    delItem(id) {
+        let updatedList = delFromList(this.state.list, id);
+        this.setState({ list: updatedList });
     }
 
     changeFilter(filter) {

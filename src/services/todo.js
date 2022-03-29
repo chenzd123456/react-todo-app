@@ -64,3 +64,10 @@ export function addToList(list, data) {
 
     return list.concat([item]);
 }
+
+export function delFromList(list, item_id) {
+    let item = list.find(item => item.id === item_id)
+    let pos = list.indexOf(item);
+    list.splice(pos, 1);
+    return list
+}
