@@ -1,5 +1,6 @@
 import React from 'react';
 import CheckBox from './CheckBox';
+import DeleteButton from './DeleteButton';
 
 export default function TodoItem(props) {
     const {id, data, changeStatus, delItem} = props;
@@ -10,7 +11,7 @@ export default function TodoItem(props) {
         <li className={className}>
             <div className="checkbox">
                 <label>
-                    <CheckBox checked={data.completed} onChange={handleChange}/> {data.text} <button onClick={() => delItem(id)}>delete</button>
+                    <CheckBox checked={data.completed} onChange={handleChange}/> {data.text} <DeleteButton onClick={() => delItem(id)}/>
                 </label>
             </div>
         </li>
